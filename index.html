@@ -42,7 +42,8 @@
             background-color: var(--ac-bg);
             /* 使用使用者指定的 Unsplash 圖片（固定 photo id）並疊加和紙色遮罩以維持可讀性 */
             /* 使用固定 Unsplash 圖片（使用 /photos/{id} 路徑以確保正確的圖片回傳） */
-            background-image: linear-gradient(rgba(246,237,226,var(--overlay-alpha)), rgba(246,237,226,var(--overlay-alpha))), url('https://source.unsplash.com/photos/h2quJ9B8eJ0/1600x900');
+            /* 先嘗試使用本機檔案，若無則回退到 Unsplash */
+            background-image: linear-gradient(rgba(246,237,226,var(--overlay-alpha)), rgba(246,237,226,var(--overlay-alpha))), url('./assets/img/background-h2quJ9B8eJ0.jpg'), url('https://source.unsplash.com/photos/h2quJ9B8eJ0/1600x900');
             background-size: cover;
             background-position: center;
             min-height: 100vh;
@@ -260,7 +261,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(rgba(246,237,226,var(--loading-overlay-alpha)), rgba(246,237,226,var(--loading-overlay-alpha))), url('https://source.unsplash.com/photos/h2quJ9B8eJ0/800x600');
+            /* Loading 也先嘗試本機圖檔，再回退到 Unsplash */
+            background: linear-gradient(rgba(246,237,226,var(--loading-overlay-alpha)), rgba(246,237,226,var(--loading-overlay-alpha))), url('./assets/img/background-h2quJ9B8eJ0.jpg'), url('https://source.unsplash.com/photos/h2quJ9B8eJ0/800x600');
             background-size: cover;
             display: flex;
             flex-direction: column;
