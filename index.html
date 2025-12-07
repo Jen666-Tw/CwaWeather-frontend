@@ -25,9 +25,9 @@
             --ac-cream: #F8F1E6; /* 卡其奶油 */
             --ac-dark: #3B2F2A; /* 深色文字 */
             --ac-card-border: rgba(60,40,25,0.08);
-            /* 遮罩透明度（可由 UI 切換） */
-            --overlay-alpha: 0.66;
-            --loading-overlay-alpha: 0.9;
+            /* 遮罩透明度（永久套用：深遮罩） */
+            --overlay-alpha: 0.95;
+            --loading-overlay-alpha: 0.98;
         }
 
         * {
@@ -265,78 +265,7 @@
             z-index: 999;
         }
 
-        /* 小浮動控制器：齒輪按鈕（點擊展開），縮小且半透明，不干擾介面 */
-        #overlayControl {
-            position: fixed;
-            right: 14px;
-            bottom: 14px;
-            z-index: 1200;
-            font-size: 0.85rem;
-        }
-
-        #overlayControl .toggle-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.85);
-            border: 1px solid rgba(0,0,0,0.06);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--ac-wood);
-            backdrop-filter: blur(4px);
-        }
-
-        #overlayControl .panel {
-            position: absolute;
-            right: 0;
-            bottom: 54px;
-            background: rgba(248,241,230,0.98);
-            border: 1px solid var(--ac-card-border);
-            padding: 8px;
-            border-radius: 10px;
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-            transform-origin: bottom right;
-            transform: translateY(6px) scale(0.98);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 160ms ease, transform 160ms ease;
-            white-space: nowrap;
-        }
-
-        #overlayControl.open .panel {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            pointer-events: auto;
-        }
-
-        #overlayControl .panel button {
-            background: transparent;
-            border: 1px solid rgba(0,0,0,0.06);
-            color: var(--ac-wood);
-            padding: 6px 8px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 700;
-        }
-
-        #overlayControl .panel button.active {
-            background: var(--ac-vermillion);
-            color: var(--ac-cream);
-            border-color: rgba(0,0,0,0.06);
-        }
-
-        #overlayControl .panel #overlayLabel {
-            padding-left: 6px;
-            color: var(--ac-wood);
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
+        /* overlay control removed for production; deep overlay is permanent */
     </style>
 </head>
 
@@ -361,15 +290,7 @@
 
     </div>
 
-    <!-- 遮罩深淺切換控制（齒輪按鈕：點擊展開） -->
-    <div id="overlayControl" aria-hidden="false">
-        <button id="overlayToggle" class="toggle-btn" aria-label="遮罩設定">⚙️</button>
-        <div class="panel" id="overlayPanel" aria-hidden="true">
-            <button id="overlayDeep" title="深遮罩">深</button>
-            <button id="overlayLight" title="淺遮罩">淺</button>
-            <span id="overlayLabel">遮罩：95%</span>
-        </div>
-    </div>
+    <!-- overlay control removed for production -->
 
     <script>
         const API_URL = "https://weather-tainan-jen.zeabur.app/api/weather/Tainan";
@@ -512,56 +433,7 @@
         }
 
         document.addEventListener("DOMContentLoaded", fetchWeather);
-        // Overlay 控制邏輯：點擊齒輪展開面板，切換遮罩深淺
-        (function () {
-            const deepBtn = document.getElementById('overlayDeep');
-            const lightBtn = document.getElementById('overlayLight');
-            const label = document.getElementById('overlayLabel');
-            const overlayControl = document.getElementById('overlayControl');
-            const overlayToggle = document.getElementById('overlayToggle');
-            const overlayPanel = document.getElementById('overlayPanel');
-
-            function setDeep() {
-                document.documentElement.style.setProperty('--overlay-alpha', '0.95');
-                document.documentElement.style.setProperty('--loading-overlay-alpha', '0.98');
-                deepBtn.classList.add('active');
-                lightBtn.classList.remove('active');
-                if (label) label.textContent = '遮罩：95%';
-            }
-
-            function setLight() {
-                document.documentElement.style.setProperty('--overlay-alpha', '0.35');
-                document.documentElement.style.setProperty('--loading-overlay-alpha', '0.65');
-                lightBtn.classList.add('active');
-                deepBtn.classList.remove('active');
-                if (label) label.textContent = '遮罩：35%';
-            }
-
-            // 綁定遮罩按鈕事件
-            deepBtn.addEventListener('click', (e) => { setDeep(); e.stopPropagation(); });
-            lightBtn.addEventListener('click', (e) => { setLight(); e.stopPropagation(); });
-
-            // Toggle panel
-            overlayToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const open = overlayControl.classList.toggle('open');
-                overlayPanel.setAttribute('aria-hidden', (!open).toString());
-            });
-
-            // 點擊空白處收起面板
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest || !overlayControl) return;
-                if (!e.target.closest('#overlayControl')) {
-                    overlayControl.classList.remove('open');
-                    overlayPanel.setAttribute('aria-hidden', 'true');
-                }
-            });
-
-            // 預設為深遮罩（差異明顯），並將 panel 初始化為收起
-            setDeep();
-            overlayControl.classList.remove('open');
-            overlayPanel.setAttribute('aria-hidden', 'true');
-        })();
+        // overlay control removed for production; deep overlay applied via CSS variables
     </script>
 </body>
 
