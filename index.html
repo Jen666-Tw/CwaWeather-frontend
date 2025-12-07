@@ -174,8 +174,14 @@
             border-radius: 0;
             border: none;
             box-shadow: none;
-            /* 以深色投影 + 微弱金色光暈讓文字在背景上跳出且具古都氣息 */
-            text-shadow: 0 4px 12px rgba(0,0,0,0.55), 0 0 10px rgba(255,244,220,0.06), 0 0 22px rgba(201,163,74,0.10);
+            /* 多層陰影製成立體感：邊緣暗緣 + 漸遠陰影，再加上溫暖光暈 */
+            text-shadow:
+                0 1px 0 rgba(0,0,0,0.88),
+                0 3px 6px rgba(0,0,0,0.65),
+                0 6px 18px rgba(0,0,0,0.45),
+                0 0 8px rgba(255,244,220,0.06),
+                0 0 20px rgba(201,163,74,0.12);
+            -webkit-text-stroke: 0.2px rgba(0,0,0,0.12);
             letter-spacing: 0.2px;
         }
 
