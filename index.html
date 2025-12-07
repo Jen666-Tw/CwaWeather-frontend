@@ -165,16 +165,18 @@
 
         .hero-desc {
             font-size: 1.3rem;
-            color: var(--ac-wood);
+            color: #ffffff; /* 反白文字 */
             margin: 18px auto 20px;
             font-weight: 900;
             display: inline-block;
-            background: rgba(248,241,230,0.95);
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 1px solid rgba(107,76,59,0.08);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-            text-shadow: none;
+            background: transparent; /* 移除背景色 */
+            padding: 0; /* 文字不再是 pill 的內距 */
+            border-radius: 0;
+            border: none;
+            box-shadow: none;
+            /* 以深色投影 + 微弱金色光暈讓文字在背景上跳出且具古都氣息 */
+            text-shadow: 0 4px 12px rgba(0,0,0,0.55), 0 0 10px rgba(255,244,220,0.06), 0 0 22px rgba(201,163,74,0.10);
+            letter-spacing: 0.2px;
         }
 
         /* === 上班族最愛的：快速建議區 === */
