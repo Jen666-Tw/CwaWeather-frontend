@@ -15,14 +15,16 @@
 
     <style>
         :root {
-            --ac-green: #7DE1A9;
-            --ac-bg-pattern: #8FD8AF;
-            --ac-cream: #FFFEF2;
-            --ac-yellow: #F9F195;
-            --ac-brown: #796452;
-            --ac-blue: #4FB5D9;
-            --ac-dark: #58504A;
-            --ac-card-border: #E6E0C8;
+            /* 古都色盤：柔和和紙底、朱紅、苔綠、靛藍、木色、金銅 */
+            --ac-bg: #F6EDE2; /* 和紙底色 */
+            --ac-vermillion: #B84A3A; /* 溫潤朱紅（鳥居色調） */
+            --ac-moss: #6B8E64; /* 苔綠 */
+            --ac-indigo: #2B3A67; /* 深靛藍 */
+            --ac-wood: #6B4C3B; /* 木色／深棕 */
+            --ac-gold: #C9A34A; /* 金銅點綴 */
+            --ac-cream: #F8F1E6; /* 卡其奶油 */
+            --ac-dark: #3B2F2A; /* 深色文字 */
+            --ac-card-border: rgba(60,40,25,0.08);
         }
 
         * {
@@ -34,13 +36,13 @@
 
         body {
             font-family: 'Zen Maru Gothic', sans-serif;
-            background-color: var(--ac-green);
-            /* 更細緻的斜紋背景 */
+            background-color: var(--ac-bg);
+            /* 紙感紋理與極細線條做層次 */
             background-image:
-                repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255, 255, 255, 0.2) 20px, rgba(255, 255, 255, 0.2) 40px);
+                linear-gradient(180deg, rgba(43,58,103,0.02) 0%, rgba(201,163,74,0.01) 100%),
+                repeating-linear-gradient(45deg, transparent, transparent 24px, rgba(0, 0, 0, 0.02) 24px, rgba(0, 0, 0, 0.02) 48px);
             min-height: 100vh;
-            color: var(--ac-dark);
-            /* 防止 iOS 左右滑動 */
+            color: var(--ac-wood);
             overflow-x: hidden;
             padding-bottom: 20px;
         }
@@ -51,29 +53,29 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
+            background: rgba(248,241,230,0.6);
+            backdrop-filter: blur(6px);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         .location-pill {
-            background: var(--ac-yellow);
-            color: var(--ac-brown);
-            padding: 5px 15px;
+            background: var(--ac-vermillion);
+            color: var(--ac-cream);
+            padding: 6px 16px;
             border-radius: 20px;
             font-weight: 900;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             transform: rotate(-2deg);
-            border: 2px solid white;
-            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 3px 0 rgba(0, 0, 0, 0.06);
         }
 
         .update-pill {
             font-size: 0.8rem;
-            color: white;
-            background: rgba(0, 0, 0, 0.2);
+            color: var(--ac-cream);
+            background: rgba(43,58,103,0.85);
             padding: 4px 10px;
             border-radius: 12px;
         }
@@ -91,8 +93,8 @@
             border-radius: 35px;
             padding: 30px 25px;
             text-align: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            border: 4px solid white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+            border: 2px solid var(--ac-card-border);
             margin-bottom: 25px;
             position: relative;
         }
@@ -103,13 +105,13 @@
             top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--ac-blue);
-            color: white;
-            padding: 5px 20px;
+            background: var(--ac-indigo);
+            color: var(--ac-cream);
+            padding: 6px 20px;
             border-radius: 20px;
             font-weight: bold;
-            border: 3px solid white;
-            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(0,0,0,0.03);
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.06);
         }
 
         .hero-temp-container {
@@ -141,13 +143,13 @@
         .hero-temp {
             font-size: 4.5rem;
             font-weight: 900;
-            color: var(--ac-brown);
+            color: var(--ac-vermillion);
             line-height: 1;
         }
 
         .hero-desc {
             font-size: 1.5rem;
-            color: #8A7B70;
+            color: var(--ac-wood);
             margin-bottom: 20px;
             font-weight: bold;
         }
@@ -166,9 +168,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: rgba(255, 255, 255, 0.5);
+            background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(248,241,230,0.95));
             padding: 10px;
             border-radius: 20px;
+            border: 1px solid var(--ac-card-border);
         }
 
         .advice-icon {
@@ -187,11 +190,10 @@
         /* === 稍後預報：橫向滑動區 === */
         .section-title {
             font-size: 1.2rem;
-            color: white;
+            color: var(--ac-wood);
             margin-bottom: 15px;
             margin-left: 10px;
             font-weight: 900;
-            text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
         }
 
         .scroll-container {
@@ -210,19 +212,18 @@
 
         .mini-card {
             min-width: 140px;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(248,241,230,0.96);
             border-radius: 25px;
-            padding: 20px 15px;
+            padding: 18px 14px;
             text-align: center;
-            border: 3px solid white;
+            border: 1px solid var(--ac-card-border);
             flex-shrink: 0;
-            /* 防止被擠壓 */
         }
 
         .mini-time {
-            background: var(--ac-green);
-            color: white;
-            padding: 3px 10px;
+            background: var(--ac-moss);
+            color: var(--ac-cream);
+            padding: 4px 10px;
             border-radius: 10px;
             font-size: 0.8rem;
             display: inline-block;
@@ -248,7 +249,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: var(--ac-green);
+            background: var(--ac-bg);
             display: flex;
             flex-direction: column;
             justify-content: center;
